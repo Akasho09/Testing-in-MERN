@@ -1,6 +1,6 @@
 import express from "express"
 import { z } from "zod";
-import { aksh } from "./db/db";
+import { prismaclient } from "./db/db";
 
 export const app = express()
 app.use(express.json());
@@ -11,7 +11,7 @@ const sumInput = z.object({
 })
 
 
-app.post("/sum" , async (req , res )=>{
+app.post("/sum" , async (req :any, res:any )=>{
     const data = req.body
     const { success } =  sumInput.safeParse(data)
 
@@ -21,7 +21,7 @@ app.post("/sum" , async (req , res )=>{
         })
     }
 
-    aksh.table1.create({
+    prismaclient.table1.create({
         data: {
             a:1,
             b:2,
@@ -30,7 +30,7 @@ app.post("/sum" , async (req , res )=>{
     })
 
     return res.status(411).json({
-        err : "Invalid Inputs"
+        message : "Invalid Inputs"
     })
 })
 
