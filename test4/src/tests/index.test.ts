@@ -1,13 +1,28 @@
-import {  test , describe , expect }  from "vitest"
-import app  from '../bin'
-import request from "supertest"
+// src/tests/index.test.ts
+import { describe, test, expect, vi, beforeEach } from "vitest";
+import request from "supertest";
+import app from "../index";
 
-describe("Testing Post Server" , async  ()=>{
-    test("It returns 1+2 " , async ()=>{
-        const res = await request(app).post("/sum").send({
-            a:1 , b:2 
-        })
-        expect(res.body.answer).toBe(3)
-        expect(res.statusCode).toBe(200)
-    })
-})
+
+vi.mock("../db", () => {
+  return {
+    default: {
+      t1: { // table
+        create: vi.fn(), // mock fns 
+        update : vi.fn()
+      },
+    },
+  };
+});
+
+describe("Testing Post Server", () => {
+  test("It returns 1+2", async () => {
+    const res = await request(app).post("/sum").send({
+      a: 1,
+      b: 2,
+    });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.answer).toBe(3);
+  });
+});

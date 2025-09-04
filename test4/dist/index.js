@@ -1,17 +1,34 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const bin_1 = __importDefault(require("./bin"));
-bin_1.default.use(express_1.default.json());
-bin_1.default.post("/sum", (req, res) => {
+const db_1 = __importDefault(require("./db"));
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use(express_1.default.json());
+app.post("/sum", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("sum");
     const data = req.body;
     const sum = data.a + data.b;
     console.log(sum);
-    res.json({
-        answer: sum
+    yield db_1.default.t1.create({
+        data: {
+            name: "akash"
+        }
     });
-});
+    res.json({
+        answer: Number(sum)
+    });
+}));
+exports.default = app;

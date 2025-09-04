@@ -10,20 +10,16 @@ app.post("/sum", async (req: Request, res: Response) => {
 
   console.log("Sum:", sum);
 
-  await prisma.t1.create({
+  const user  = await prisma.add.create({
     data: {
-      name: "akash",
-    },
-  });
-
-  await prisma.t1.update({
-    data: {
-      name: "ahmad",
+      num1 : a,
+      num2 : b,
     },
   });
 
   res.json({
     answer: Number(sum),
+    user : user.id
   });
 });
 

@@ -13,14 +13,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const vitest_1 = require("vitest");
-const bin_1 = __importDefault(require("../bin"));
+const index_1 = __importDefault(require("../index"));
 const supertest_1 = __importDefault(require("supertest"));
-(0, vitest_1.describe)("Testing Post Server", () => __awaiter(void 0, void 0, void 0, function* () {
+vitest_1.vi.mock("../db", () => {
+    return {
+        PrismaClient: {
+            create: vitest_1.vi.fn()
+        }
+    };
+});
+(0, vitest_1.describe)("Testing Post Server", () => {
     (0, vitest_1.test)("It returns 1+2 ", () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield (0, supertest_1.default)(bin_1.default).post("/sum").send({
+        const res = yield (0, supertest_1.default)(index_1.default).post("/sum").send({
             a: 1, b: 2
         });
         (0, vitest_1.expect)(res.body.answer).toBe(3);
         (0, vitest_1.expect)(res.statusCode).toBe(200);
     }));
-}));
+});
