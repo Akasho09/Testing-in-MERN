@@ -6,9 +6,7 @@ app.use(express.json());
 
 app.post("/sum", async (req: Request, res: Response) => {
   const { a, b } = req.body;
-  const sum = a + b;
-
-  console.log("Sum:", sum);
+  const sum = b + a;
 
   const user  = await prisma.add.create({
     data: {
