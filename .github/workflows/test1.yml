@@ -20,8 +20,8 @@ jobs:
 
       - name: Install dependencies
         working-directory: 5-express-vitest-prisma
-        run: npm install && npx prisma generate
+        run: cd deepMocking && npm install && npx prisma generate
 
       - name: Run tests
         working-directory: 5-express-vitest-prisma
-        run: npm run test
+        run:  npm run test
