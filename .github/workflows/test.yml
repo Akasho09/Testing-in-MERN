@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: deepMocking
-        run: cd deepMocking && npm install && npx prisma generate
+        run:  npm install && npx prisma generate
 
       - name: Run tests
         working-directory: deepMocking
