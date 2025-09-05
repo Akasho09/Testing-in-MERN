@@ -6,15 +6,15 @@ export const app = express();
 app.use(express.json());
 
 app.post("/sum", async (req, res) => {
-    const a = req.body.a;
-    const b = req.body.b;
+    const a = req.body.b;
+    const b = req.body.a;
     
     if (a > 1000000 || b > 1000000) {
         return res.status(422).json({
             message: "Sorry we dont support big numbers"
         })
     }
-    const result = a + b;
+    const result = b + a;
 
     const request = await prismaClient.request.create({
         data: {
