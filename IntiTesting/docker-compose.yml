@@ -1,0 +1,10 @@
+version : "1.0"
+services : 
+    db: 
+      image: postgres
+      restart : always
+      environment:
+        - POSTGRES_PASSWORD=mysecretpassword
+        - POSTGRES_USER=postgres
+      ports:
+        - 5432:5432
